@@ -1,0 +1,36 @@
+DE0-Nano & USB Host Shield で MicroBridge を実現
+
+  - DE0-Nano の GPIO0 ピンヘッダに USB Host Shield を接続します
+    ピンの割り当ては QSF ファイルを参照してください
+  - USB Host Shield は旧版を改造して使っています
+    新版でも大丈夫と思います
+    改造は 5V レギュレータを除去して、DE0-Nano から +5V 供給するようにしています
+  - QuartusII 11.0SP1 Web Edition を使っています
+  - FPGA 内は Nios2/e と標準ペリフェラルの PIO, SPI を使って
+    Host Shield の MAX3421E と通信しています
+
+ビルド～実行の手順
+
+  - まず Quartus でプロジェクト開きます
+  - Quartus から SOPC Builder を起動し、Generate を実行します
+  - NiosII 用 Eclipse を起動します
+    Workspace は適当なパスを指定してください
+  - Import -> Import Nios II Software Build Tools Project で BSP をインポート
+    - Project location: に mb_de0nano_bsp のパスを指定します
+    - Project name: は適当でもいいです
+    - Clean project when importing はどちらでも
+    - Toolchain: は MinGW Nios II GCC4 を選択
+  - Import -> Import Nios II Software Build Tools Project でデモアプリをインポート
+    - Project location: に mb_de0nano_demo のパスを指定します
+    - Project name: は適当でもいいです
+    - Clean project when importing はどちらでも
+    - Managed project は On
+    - Toolchain: は MinGW Nios II GCC4 を選択
+  - BSP を Generate し直します
+  - アプリを Build します (on-chip SRAM の初期化ファイルの生成)
+    - アプリ project 右クリックして Make Targets -> Build... を選択
+    - ダイアログで mem_init_install 選択して Build ボタン
+  - Quartus に戻って論理合成実行します。
+  - sof をダウンロードしてから nios2-terminal 起動
+
+
