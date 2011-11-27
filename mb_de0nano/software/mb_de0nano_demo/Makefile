@@ -165,7 +165,7 @@ CREATE_LINKER_MAP := 1
 APP_CFLAGS_DEFINED_SYMBOLS :=
 APP_CFLAGS_UNDEFINED_SYMBOLS :=
 APP_CFLAGS_OPTIMIZATION := -Os
-APP_CFLAGS_DEBUG_LEVEL := 
+APP_CFLAGS_DEBUG_LEVEL :=
 APP_CFLAGS_WARNINGS := -Wall
 APP_CFLAGS_USER_FLAGS := -fno-exceptions -fno-rtti
 
@@ -403,6 +403,8 @@ endif
 # memories that can be initialized by RTL simulation.
 # This variable should be set to the same name as your SOPC Builder system name.
 # For example, if you have a system called "foo.sopc", this variable should be set to "foo".
+
+QUARTUS_PROJECT_DIR = ../..
 
 # If SOPC_NAME is not set and QUARTUS_PROJECT_DIR is set, then derive SOPC_NAME.
 ifeq ($(SOPC_NAME),)
