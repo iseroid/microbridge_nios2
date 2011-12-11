@@ -119,7 +119,7 @@ void max3421e_write(uint8_t reg, uint8_t value)
 	data[0] = reg | 0x02;
 	data[1] = value;
 
-	alt_avalon_spi_command( SPI_0_BASE, 0, 2, data, 0, 0, 0 );
+	alt_avalon_spi_command( SPI_USB_BASE, 0, 2, data, 0, 0, 0 );
 //	alt_printf( "W %x %x\n", reg, value );
 }
 
@@ -133,8 +133,8 @@ void max3421e_write(uint8_t reg, uint8_t value)
 uint8_t * max3421e_writeMultiple(uint8_t reg, uint8_t count, uint8_t * values)
 {
 	reg |= 0x02;
-	alt_avalon_spi_command( SPI_0_BASE, 0, 1, &reg, 0, 0, ALT_AVALON_SPI_COMMAND_MERGE );
-	alt_avalon_spi_command( SPI_0_BASE, 0, count, values, 0, 0, 0 );
+	alt_avalon_spi_command( SPI_USB_BASE, 0, 1, &reg, 0, 0, ALT_AVALON_SPI_COMMAND_MERGE );
+	alt_avalon_spi_command( SPI_USB_BASE, 0, count, values, 0, 0, 0 );
 
 	return (values + count);
 }
@@ -149,7 +149,7 @@ uint8_t max3421e_read(uint8_t reg)
 {
 	alt_u8 data[1];
 
-	alt_avalon_spi_command( SPI_0_BASE, 0, 1, &reg, 1, data, 0 );
+	alt_avalon_spi_command( SPI_USB_BASE, 0, 1, &reg, 1, data, 0 );
 
 //	alt_printf( "R %x %x\n", reg, data[0] );
 
@@ -166,7 +166,7 @@ uint8_t max3421e_read(uint8_t reg)
  */
 uint8_t * max3421e_readMultiple(uint8_t reg, uint8_t count, uint8_t * values)
 {
-	alt_avalon_spi_command( SPI_0_BASE, 0, 1, &reg, count, values, 0 );
+	alt_avalon_spi_command( SPI_USB_BASE, 0, 1, &reg, count, values, 0 );
 
 	return (values + count);
 }
@@ -231,10 +231,10 @@ uint8_t max3421e_poll(void)
 	uint8_t rcode = 0;
 
 	// Check interrupt.
-	if( IORD_ALTERA_AVALON_PIO_DATA( PIO_0_BASE ) & 0x1 )
+	if( IORD_ALTERA_AVALON_PIO_DATA( PIO_OUT_BASE ) & 0x1 )
 		rcode = max3421e_interruptHandler();
 
-	if( IORD_ALTERA_AVALON_PIO_DATA( PIO_0_BASE ) & 0x2 )
+	if( IORD_ALTERA_AVALON_PIO_DATA( PIO_OUT_BASE ) & 0x2 )
 		max3421e_gpxInterruptHandler();
 
 	return (rcode);

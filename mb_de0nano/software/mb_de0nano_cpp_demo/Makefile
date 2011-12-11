@@ -137,7 +137,7 @@ ACDS_VERSION := 11.0sp1
 # Define path to the application ELF. 
 # It may be used by the makefile fragments so is defined before including them. 
 # 
-ELF := mb_de0nano_demo.elf
+ELF := mb_de0nano_cpp_demo.elf
 
 # Paths to C, C++, and assembly source files.
 C_SRCS := mb_de0nano_demo.c
@@ -179,7 +179,7 @@ CRT0 :=
 SYS_LIB :=
 
 # Define path to the root of the BSP.
-BSP_ROOT_DIR := ../mb_de0nano_bsp/
+BSP_ROOT_DIR := ../mb_de0nano_cpp_bsp/
 
 # List of application specific include directories, library directories and library names
 APP_INCLUDE_DIRS :=

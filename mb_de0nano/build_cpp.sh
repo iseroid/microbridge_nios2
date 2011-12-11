@@ -14,10 +14,10 @@ fi
 
 rm -f onchip_memory2_0.hex
 
-cd software/mb_de0nano_bsp/
+cd software/mb_de0nano_cpp_bsp/
 nios2-bsp-generate-files --bsp-dir . --settings settings.bsp || exit
 
-cd ../mb_de0nano_demo
+cd ../mb_de0nano_cpp_demo
 make mem_init_install || exit
 
 cd ../..
