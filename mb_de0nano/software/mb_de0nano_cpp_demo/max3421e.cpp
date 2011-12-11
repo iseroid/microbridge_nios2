@@ -231,11 +231,11 @@ uint8_t max3421e_poll(void)
 	uint8_t rcode = 0;
 
 	// Check interrupt.
-	if( IORD_ALTERA_AVALON_PIO_DATA( PIO_OUT_BASE ) & 0x1 )
+	if( ! IORD_ALTERA_AVALON_PIO_DATA( PIO_OUT_BASE ) & 0x1 )
 		rcode = max3421e_interruptHandler();
 
-	if( IORD_ALTERA_AVALON_PIO_DATA( PIO_OUT_BASE ) & 0x2 )
-		max3421e_gpxInterruptHandler();
+//	if( ! IORD_ALTERA_AVALON_PIO_DATA( PIO_OUT_BASE ) & 0x2 )
+//		max3421e_gpxInterruptHandler();
 
 	return (rcode);
 }
