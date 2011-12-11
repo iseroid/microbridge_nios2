@@ -1,21 +1,12 @@
-DE0-Nano & USB Host Shield で MicroBridge を実現
-
-  - DE0-Nano の GPIO0 ピンヘッダに USB Host Shield を接続します
-    ピンの割り当ては QSF ファイルを参照 or 変更してください
-  - USB Host Shield は旧版を改造して使っています
-    新版でも大丈夫と思います
-    改造は 5V レギュレータを除去して、DE0-Nano から +5V 供給するようにしています
-  - QuartusII 11.0SP1 Web Edition を使っています
-  - FPGA 内は Nios2/e と標準ペリフェラルの PIO, SPI を使って
-    Host Shield の MAX3421E と通信しています
-
-ビルド～実行の手順
+ビルド～実行の手順 (C 版)
 
   - NiosII Command Shell を起動します
   - カレントディレクトリをこの README が存在するディレクトリにします
-  - build.sh を実行します
+  - build_c.sh を実行します
   - Quartus Programmer で SOF ファイルをダウンロードして、
     nios2-terminal で出力メッセージを確認します
+  - Android 機と USB 接続し、Android アプリ起動します
+
 
 GUI で手動でビルドする手順
   - QuartusII でプロジェクト開きます
