@@ -2,11 +2,11 @@
 <system name="mb_de0nano_sopc">
  <parameter name="bonusData"><![CDATA[bonusData 
 {
-   element jtag_uart_0.avalon_jtag_slave
+   element jtag_uart.avalon_jtag_slave
    {
       datum baseAddress
       {
-         value = "32808";
+         value = "32832";
          type = "long";
       }
    }
@@ -22,7 +22,7 @@
    {
       datum baseAddress
       {
-         value = "32800";
+         value = "32768";
          type = "long";
       }
    }
@@ -47,7 +47,7 @@
          type = "long";
       }
    }
-   element jtag_uart_0
+   element jtag_uart
    {
       datum _sortIndex
       {
@@ -66,7 +66,7 @@
          type = "int";
       }
    }
-   element pio_0
+   element pio_in
    {
       datum _sortIndex
       {
@@ -74,23 +74,7 @@
          type = "int";
       }
    }
-   element timer_0.s1
-   {
-      datum baseAddress
-      {
-         value = "32768";
-         type = "long";
-      }
-   }
-   element pio_0.s1
-   {
-      datum baseAddress
-      {
-         value = "32816";
-         type = "long";
-      }
-   }
-   element spi_0
+   element pio_out
    {
       datum _sortIndex
       {
@@ -98,12 +82,44 @@
          type = "int";
       }
    }
-   element spi_0.spi_control_port
+   element pio_in.s1
    {
       datum baseAddress
       {
-         value = "32832";
+         value = "32864";
          type = "long";
+      }
+   }
+   element timer_1ms.s1
+   {
+      datum baseAddress
+      {
+         value = "32800";
+         type = "long";
+      }
+   }
+   element pio_out.s1
+   {
+      datum baseAddress
+      {
+         value = "32896";
+         type = "long";
+      }
+   }
+   element spi_usb.spi_control_port
+   {
+      datum baseAddress
+      {
+         value = "32928";
+         type = "long";
+      }
+   }
+   element spi_usb
+   {
+      datum _sortIndex
+      {
+         value = "8";
+         type = "int";
       }
    }
    element sysid
@@ -114,7 +130,7 @@
          type = "int";
       }
    }
-   element timer_0
+   element timer_1ms
    {
       datum _sortIndex
       {
@@ -134,8 +150,8 @@
  <parameter name="maxAdditionalLatency" value="0" />
  <parameter name="projectName" value="mb_de0nano.qpf" />
  <parameter name="sopcBorderPoints" value="true" />
- <parameter name="systemHash" value="2459752586" />
- <parameter name="timeStamp" value="1322037390203" />
+ <parameter name="systemHash" value="11008078756" />
+ <parameter name="timeStamp" value="1323000797916" />
  <module kind="clock_source" version="11.0" enabled="1" name="clk_0">
   <parameter name="clockFrequency" value="50000000" />
   <parameter name="clockFrequencyKnown" value="true" />
@@ -260,7 +276,7 @@
   <parameter name="dcache_numTCDM" value="_0" />
   <parameter name="dcache_lineSize" value="_32" />
   <parameter name="dcache_bursts" value="false" />
-  <parameter name="dataSlaveMapParam"><![CDATA[<address-map><slave name='onchip_memory2_0.s1' start='0x0' end='0x4000' /><slave name='timer_0.s1' start='0x8000' end='0x8020' /><slave name='sysid.control_slave' start='0x8020' end='0x8028' /><slave name='jtag_uart_0.avalon_jtag_slave' start='0x8028' end='0x8030' /><slave name='pio_0.s1' start='0x8030' end='0x8040' /><slave name='spi_0.spi_control_port' start='0x8040' end='0x8060' /><slave name='cpu_0.jtag_debug_module' start='0x8800' end='0x9000' /></address-map>]]></parameter>
+  <parameter name="dataSlaveMapParam"><![CDATA[<address-map><slave name='onchip_memory2_0.s1' start='0x0' end='0x4000' /><slave name='sysid.control_slave' start='0x8000' end='0x8008' /><slave name='timer_1ms.s1' start='0x8020' end='0x8040' /><slave name='jtag_uart.avalon_jtag_slave' start='0x8040' end='0x8048' /><slave name='pio_in.s1' start='0x8060' end='0x8070' /><slave name='pio_out.s1' start='0x8080' end='0x8090' /><slave name='spi_usb.spi_control_port' start='0x80A0' end='0x80C0' /><slave name='cpu_0.jtag_debug_module' start='0x8800' end='0x9000' /></address-map>]]></parameter>
   <parameter name="dataAddrWidth" value="16" />
   <parameter name="customInstSlavesSystemInfo" value="&lt;info/&gt;" />
   <parameter name="cpuReset" value="false" />
@@ -269,7 +285,11 @@
   <parameter name="breakSlave">cpu_0.jtag_debug_module</parameter>
   <parameter name="breakOffset" value="32" />
  </module>
- <module kind="altera_avalon_timer" version="11.0" enabled="1" name="timer_0">
+ <module
+   kind="altera_avalon_timer"
+   version="11.0"
+   enabled="1"
+   name="timer_1ms">
   <parameter name="alwaysRun" value="true" />
   <parameter name="counterSize" value="32" />
   <parameter name="fixedPeriod" value="true" />
@@ -288,7 +308,7 @@
    kind="altera_avalon_jtag_uart"
    version="11.0"
    enabled="1"
-   name="jtag_uart_0">
+   name="jtag_uart">
   <parameter name="allowMultipleConnections" value="false" />
   <parameter name="hubInstanceID" value="0" />
   <parameter name="readBufferDepth" value="64" />
@@ -301,7 +321,7 @@
   <parameter name="writeBufferDepth" value="64" />
   <parameter name="writeIRQThreshold" value="8" />
  </module>
- <module kind="altera_avalon_pio" version="11.0" enabled="1" name="pio_0">
+ <module kind="altera_avalon_pio" version="11.0" enabled="1" name="pio_in">
   <parameter name="bitClearingEdgeCapReg" value="false" />
   <parameter name="bitModifyingOutReg" value="false" />
   <parameter name="captureEdge" value="false" />
@@ -315,7 +335,7 @@
   <parameter name="simDrivenValue" value="0" />
   <parameter name="width" value="8" />
  </module>
- <module kind="altera_avalon_spi" version="11.0" enabled="1" name="spi_0">
+ <module kind="altera_avalon_spi" version="11.0" enabled="1" name="spi_usb">
   <parameter name="clockPhase" value="0" />
   <parameter name="clockPolarity" value="0" />
   <parameter name="dataWidth" value="8" />
@@ -327,8 +347,22 @@
   <parameter name="masterSPI" value="true" />
   <parameter name="numberOfSlaves" value="1" />
   <parameter name="syncRegDepth" value="2" />
-  <parameter name="targetClockRate" value="1000000" />
+  <parameter name="targetClockRate" value="12500000" />
   <parameter name="targetSlaveSelectToSClkDelay" value="0.0" />
+ </module>
+ <module kind="altera_avalon_pio" version="11.0" enabled="1" name="pio_out">
+  <parameter name="bitClearingEdgeCapReg" value="false" />
+  <parameter name="bitModifyingOutReg" value="false" />
+  <parameter name="captureEdge" value="false" />
+  <parameter name="clockRate" value="50000000" />
+  <parameter name="direction" value="Output" />
+  <parameter name="edgeType" value="RISING" />
+  <parameter name="generateIRQ" value="false" />
+  <parameter name="irqType" value="LEVEL" />
+  <parameter name="resetValue" value="0" />
+  <parameter name="simDoTestBenchWiring" value="false" />
+  <parameter name="simDrivenValue" value="0" />
+  <parameter name="width" value="8" />
  </module>
  <connection
    kind="clock"
@@ -368,16 +402,20 @@
   <parameter name="arbitrationPriority" value="1" />
   <parameter name="baseAddress" value="0x0000" />
  </connection>
- <connection kind="clock" version="11.0" start="clk_0.clk" end="timer_0.clk" />
+ <connection kind="clock" version="11.0" start="clk_0.clk" end="timer_1ms.clk" />
  <connection
    kind="avalon"
    version="11.0"
    start="cpu_0.data_master"
-   end="timer_0.s1">
+   end="timer_1ms.s1">
   <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x8000" />
+  <parameter name="baseAddress" value="0x8020" />
  </connection>
- <connection kind="interrupt" version="11.0" start="cpu_0.d_irq" end="timer_0.irq">
+ <connection
+   kind="interrupt"
+   version="11.0"
+   start="cpu_0.d_irq"
+   end="timer_1ms.irq">
   <parameter name="irqNumber" value="0" />
  </connection>
  <connection kind="clock" version="11.0" start="clk_0.clk" end="sysid.clk" />
@@ -387,39 +425,52 @@
    start="cpu_0.data_master"
    end="sysid.control_slave">
   <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x8020" />
+  <parameter name="baseAddress" value="0x8000" />
  </connection>
- <connection kind="clock" version="11.0" start="clk_0.clk" end="jtag_uart_0.clk" />
+ <connection kind="clock" version="11.0" start="clk_0.clk" end="jtag_uart.clk" />
  <connection
    kind="avalon"
    version="11.0"
    start="cpu_0.data_master"
-   end="jtag_uart_0.avalon_jtag_slave">
+   end="jtag_uart.avalon_jtag_slave">
   <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x8028" />
+  <parameter name="baseAddress" value="0x8040" />
  </connection>
  <connection
    kind="interrupt"
    version="11.0"
    start="cpu_0.d_irq"
-   end="jtag_uart_0.irq">
+   end="jtag_uart.irq">
   <parameter name="irqNumber" value="1" />
  </connection>
- <connection kind="clock" version="11.0" start="clk_0.clk" end="pio_0.clk" />
- <connection kind="avalon" version="11.0" start="cpu_0.data_master" end="pio_0.s1">
-  <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x8030" />
- </connection>
- <connection kind="clock" version="11.0" start="clk_0.clk" end="spi_0.clk" />
+ <connection kind="clock" version="11.0" start="clk_0.clk" end="pio_in.clk" />
  <connection
    kind="avalon"
    version="11.0"
    start="cpu_0.data_master"
-   end="spi_0.spi_control_port">
+   end="pio_in.s1">
   <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x8040" />
+  <parameter name="baseAddress" value="0x8060" />
  </connection>
- <connection kind="interrupt" version="11.0" start="cpu_0.d_irq" end="spi_0.irq">
+ <connection kind="clock" version="11.0" start="clk_0.clk" end="spi_usb.clk" />
+ <connection
+   kind="avalon"
+   version="11.0"
+   start="cpu_0.data_master"
+   end="spi_usb.spi_control_port">
+  <parameter name="arbitrationPriority" value="1" />
+  <parameter name="baseAddress" value="0x80a0" />
+ </connection>
+ <connection kind="interrupt" version="11.0" start="cpu_0.d_irq" end="spi_usb.irq">
   <parameter name="irqNumber" value="2" />
+ </connection>
+ <connection kind="clock" version="11.0" start="clk_0.clk" end="pio_out.clk" />
+ <connection
+   kind="avalon"
+   version="11.0"
+   start="cpu_0.data_master"
+   end="pio_out.s1">
+  <parameter name="arbitrationPriority" value="1" />
+  <parameter name="baseAddress" value="0x8080" />
  </connection>
 </system>
