@@ -8,7 +8,7 @@ MicroBridge を実現します。
 
 動作確認環境
 ------------
-* DE0-Nano
+* DE0-Nano(mb_de0nano), DE0(mb_de0)
 * USB Host Shield (DEV-09628 を改造。後述)
 * QuartusII 11.0sp1 Web Edition
   * VerilogHDL
@@ -25,6 +25,7 @@ USB Host Shield との接続
 ------------------------
 USB Host Shield と DE0-Nano 等の 40pin ピンヘッダとの接続は以下のようにしています。
 GPX は接続しなくても動きます。
+※DE0の場合は下記図と同じピン配置でGPIO0にマッピングされています。
 
                +------+
        (NC) ---| 1   2|--- SCLK
@@ -52,4 +53,5 @@ DE0-Nano からの 5V を 5V ラインに供給しています。
     * mb_de0nano_cpp_demo/ .... C++ 版 デモアプリ
     * mb_de0nano_c_bsp/ .... C 版 BSP
     * mb_de0nano_c_demo/ .... C 版 デモアプリ
+* mb_de0/ .... DE0での構成
 

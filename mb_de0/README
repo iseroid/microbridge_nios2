@@ -1,0 +1,29 @@
+※ファイル名、ディレクトリ名はそのまま引き継いだためde0_nanoとなっていますが、
+ mb_de0下のファイルはde0対応になっています
+
+ビルド～実行の手順 (C 版)
+
+  - NiosII Command Shell を起動します
+  - カレントディレクトリをこの README が存在するディレクトリにします
+  - build_c.sh を実行します
+  - Quartus Programmer で SOF ファイルをダウンロードして、
+    nios2-terminal で出力メッセージを確認します
+  - Android 機と USB 接続し、Android アプリ起動します
+
+
+GUI で手動でビルドする手順
+  - QuartusII でプロジェクト開きます
+  - QuartusII から SOPC Builder 起動して Generate します
+    - BSP の generate には sopcinfo が必要なので先に SOPC Builder 実行が必要です
+  - SOPC Builder は終了させて OK です
+  - QuartusII はそのままで、NiosII 用の Eclipse 起動します
+  - Import Nis II Software Build Tool Project で BSP とアプリをそれぞれ import します
+  - BSP を generate します
+    - git には最小限のファイルしか入れていないし、パスとか変化しているので generate が必要になります
+  - アプリをビルドします
+    - 普通に Build ではなく Make Targets から mem_init_install を Build
+    - これで、QuartusII のディレクトリの onchip_memory2_0.hex が更新されるはずです
+  - Eclipse 終了させて OK です
+  - QuartusII に戻って論理合成実行します
+    - これで mb_de0nano.sof が生成されているはずです
+
